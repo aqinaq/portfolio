@@ -3,60 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Graphic design portfolio" />
+    <meta name="description" content="Akbope Bakytkeldy — graphic designer in Astana, Kazakhstan. Explore visual identities, expressive posters, social campaigns and editorial design." />
     <title>Akbope Bakytkeldy — graphic designer</title>
     <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="creative.css" />
     <link rel="stylesheet" href="features.css" />
+    <link rel="stylesheet" href="creative.css" />
   </head>
-  <body class="is-loading">
+  <body>
+    <a class="skip-link" href="#work">Skip to selected work</a>
     <div class="loader" aria-hidden="true"><div class="loader-mark">✳</div><p>loading creative chaos</p><b>00%</b></div>
     <div class="cursor-dot" aria-hidden="true"></div>
     <header class="topbar">
       <a class="logo" href="#top">Ақбөпе<br />Бақыткелді<span>®</span></a>
+      <nav class="main-nav" aria-label="Main navigation"><a href="#work" data-nav="work">Work <span>12</span></a><a href="#about" data-nav="about">About</a></nav>
       <p class="topbar-note">graphic designer<br />based in Kazakhstan</p>
       <div class="top-actions"><span class="availability"><i></i> available for freelance</span><button class="language-toggle" type="button" aria-label="Қазақ тіліне ауысу">ҚАЗ</button><a class="cv-link" href="public/akbope-bakytkeldy-cv.pdf" download>CV ↓</a><a class="contact-link" href="#contact">let's talk <i>↗</i></a></div>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="hero-label">( 01 — portfolio 2026 )</div>
-        <h1>Visuals with<br /><em>flavour</em> &amp; feeling.</h1>
-        <div class="studio-stickers" aria-hidden="true">
-          <div class="sticker sticker-smile">☺</div>
-          <div class="sticker sticker-cmyk">CMYK<br /><b>100%</b></div>
-          <div class="sticker sticker-type">TYPE<br />IS<br />FUN</div>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-label">Independent graphic designer / Portfolio 2026</div>
+        <h1 id="hero-title">Made to<br />make you<br /><em>look.</em><span class="hero-asterisk" aria-hidden="true">✳</span></h1>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orbit"></div>
+          <img class="hero-print print-back" src="public/assets/weekendblooms%20flyer.webp" alt="" width="1000" height="1417" />
+          <img class="hero-print print-front" src="public/assets/sushi%201.webp" alt="" width="1200" height="1600" fetchpriority="high" />
+          <div class="art-stamp">a little bold.<br />a lot of feeling.<span>☺</span></div>
+          <div class="art-caption">A few things from my world ↗</div>
+          <div class="registration reg-one">+</div><div class="registration reg-two">+</div>
         </div>
         <div class="hero-bottom">
-          <p>Мен визуалды айдентика, постерлер және әлеуметтік желіге арналған дизайн жасаймын.</p>
-          <a class="scroll-hint" href="#work">scroll to explore <span>↓</span></a>
+          <p>Visual identities, posters and social campaigns with colour, character and a point of view.</p>
+          <a class="scroll-hint" href="#work">Explore my work <span>↘</span></a>
         </div>
-        <div class="star star-one">✦</div><div class="star star-two">✦</div>
+        <div class="hero-footer"><span>AKBOPE BAKYTKELDY</span><span>ASTANA, KAZAKHSTAN ↗</span><span>SCROLL FOR THE GOOD STUFF ↓</span></div>
       </section>
 
       <section class="marquee" aria-label="Design services">
         <div><span>BRANDING</span><b>✳</b><span>POSTERS</span><b>✳</b><span>SOCIAL MEDIA</span><b>✳</b><span>ART DIRECTION</span><b>✳</b><span>BRANDING</span><b>✳</b><span>POSTERS</span><b>✳</b></div>
       </section>
 
-      <section class="about">
+      <section class="work" id="work">
+        <div class="section-head"><p>( selected work )</p><p>2024—2026</p></div>
+        <div class="work-heading"><h2>Selected work,<br /><em>full of character.</em></h2><p>A collection of campaigns, posters and visual experiments.</p></div>
+        <div class="work-tools"><div class="filters" role="group" aria-label="Project filters"><button class="active" data-filter="all">all</button><button data-filter="series">series</button><button data-filter="poster">posters</button><button data-filter="branding">branding</button></div><button class="shuffle-button" type="button">shuffle my work ↻</button></div>
+        <p class="shuffle-status" aria-live="polite"></p>
+        <div class="project-grid" aria-label="Portfolio projects">
+          <!-- Project cards are generated from the current design folder. -->
+        </div>
+      </section>
+
+      <section class="about" id="about">
         <div class="about-tag">( a little bit about me )</div>
         <p class="about-copy">I turn <span>“what if?”</span> into visuals that make you look twice.</p>
         <div class="about-details"><p>Мен — Астанадағы Astana IT University студенті және freestyle графикалық дизайнермін. Қызық идея, жаңа формат не бейтаныс жанр болса — бірге зерттеп көруге дайынмын.</p><div class="social-links"><a href="https://instagram.com/mianhaeswag" target="_blank" rel="noopener">instagram <i>↗</i></a><a href="https://t.me/meuseuk" target="_blank" rel="noopener">telegram <i>↗</i></a></div></div>
-        <figure class="portrait"><img src="public/assets/akbope-portrait.webp" alt="Ақбөпе Бақыткелді" /><figcaption>akböpe, outside<br />the screen ✳</figcaption></figure>
+        <figure class="portrait"><img loading="lazy" src="public/assets/akbope-portrait.webp" alt="Ақбөпе Бақыткелді" /><figcaption>akböpe, outside<br />the screen ✳</figcaption></figure>
         <div class="flower">✿</div>
-      </section>
-
-      <section class="work" id="work">
-        <div class="section-head"><p>( selected work )</p><p>2024—2026</p></div>
-        <div class="work-tools"><div class="filters" role="group" aria-label="Project filters"><button class="active" data-filter="all">all</button><button data-filter="series">series</button><button data-filter="poster">posters</button><button data-filter="branding">branding</button></div><button class="shuffle-button" type="button">shuffle my work ↻</button></div>
-        <p class="shuffle-status" aria-live="polite"></p>
-        <div class="project-grid" aria-label="Портфолио жобалары">
-          <!-- Project cards are generated from the current design folder. -->
-        </div>
       </section>
 
       <section class="services">
@@ -85,18 +91,19 @@
       <section class="contact" id="contact">
         <p>( have an idea? )</p>
         <h2>Let's make<br />something <em>fun.</em></h2>
-        <div class="contact-layout"><a href="https://t.me/meuseuk" target="_blank" rel="noopener">@meuseuk <span>↗</span></a><form class="brief-form"><p>or send a tiny brief ↓</p><input name="project" required placeholder="what are we making?" /><input name="mood" placeholder="mood / colour / reference" /><input name="deadline" placeholder="when do you need it?" /><button type="submit">send brief to telegram ↗</button></form></div>
+        <div class="contact-layout"><a href="https://t.me/meuseuk" target="_blank" rel="noopener">@meuseuk <span>↗</span></a><form class="brief-form"><p>or send a tiny brief ↓</p><input name="project" aria-label="Project description" required placeholder="what are we making?" /><input name="mood" aria-label="Mood, colour or reference" placeholder="mood / colour / reference" /><input name="deadline" aria-label="Project deadline" placeholder="when do you need it?" /><button type="submit">send brief to telegram ↗</button></form></div>
       </section>
     </main>
 
     <footer><p>© 2026 Ақбөпе Бақыткелді</p><p>made with colour &amp; curiosity</p><a href="#top">back to top ↑</a></footer>
 
-    <dialog class="gallery-modal">
-      <button class="close" aria-label="Жабу">×</button>
-      <p class="modal-label"></p>
+    <dialog class="gallery-modal" aria-labelledby="modal-title">
+      <button class="close" aria-label="Close project">×</button>
+      <p class="modal-label" id="modal-title"></p>
       <div class="case-study-content"></div>
       <div class="gallery-content"></div>
     </dialog>
+    <noscript><p style="padding:24px">Please enable JavaScript to explore the complete project gallery and language options. You can also <a href="https://t.me/meuseuk">contact Akbope on Telegram</a>.</p></noscript>
     <script src="script.js"></script>
   </body>
 </html>
