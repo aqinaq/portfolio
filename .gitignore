@@ -1,0 +1,5 @@
+dist/
+tmp/
+work/
+outputs/
+.DS_Store

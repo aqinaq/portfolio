@@ -1,22 +1,25 @@
 <!doctype html>
-<html lang="kk">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Graphic design portfolio" />
     <title>Akbope Bakytkeldy — graphic designer</title>
+    <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="creative.css" />
+    <link rel="stylesheet" href="features.css" />
   </head>
-  <body>
+  <body class="is-loading">
+    <div class="loader" aria-hidden="true"><div class="loader-mark">✳</div><p>loading creative chaos</p><b>00%</b></div>
     <div class="cursor-dot" aria-hidden="true"></div>
     <header class="topbar">
       <a class="logo" href="#top">Ақбөпе<br />Бақыткелді<span>®</span></a>
       <p class="topbar-note">graphic designer<br />based in Kazakhstan</p>
-      <a class="contact-link" href="#contact">let's talk <i>↗</i></a>
+      <div class="top-actions"><span class="availability"><i></i> available for freelance</span><button class="language-toggle" type="button" aria-label="Қазақ тіліне ауысу">ҚАЗ</button><a class="cv-link" href="public/akbope-bakytkeldy-cv.pdf" download>CV ↓</a><a class="contact-link" href="#contact">let's talk <i>↗</i></a></div>
     </header>
 
     <main id="top">
@@ -49,6 +52,8 @@
 
       <section class="work" id="work">
         <div class="section-head"><p>( selected work )</p><p>2024—2026</p></div>
+        <div class="work-tools"><div class="filters" role="group" aria-label="Project filters"><button class="active" data-filter="all">all</button><button data-filter="series">series</button><button data-filter="poster">posters</button><button data-filter="branding">branding</button></div><button class="shuffle-button" type="button">shuffle my work ↻</button></div>
+        <p class="shuffle-status" aria-live="polite"></p>
         <div class="project-grid" aria-label="Портфолио жобалары">
           <!-- Project cards are generated from the current design folder. -->
         </div>
@@ -73,7 +78,7 @@
         <div class="mood-grid">
           <article class="mood-card colour-card"><p>01 / colour energy</p><div class="colour-dots"><i></i><i></i><i></i><i></i><i></i></div><b>LOUD<br />ON PURPOSE</b></article>
           <article class="mood-card type-card"><p>02 / type mood</p><b>BIG<br /><em>weird</em><br />type.</b><span>serif × sans × texture</span></article>
-          <article class="mood-card sound-card"><p>03 / design soundtrack</p><div class="cassette">PLAY<br /><b>▶</b></div><span>send me 3 songs<br />to add here ✳</span></article>
+          <article class="mood-card sound-card"><p>03 / design soundtrack</p><div class="cassette">PLAY<br /><b>▶</b></div><ol class="playlist"><li><b>Public Enemy 4shomix</b><span>Lngshot</span></li><li><b>Ridin'</b><span>Lana Del Rey &amp; A$AP Rocky</span></li><li><b>Sapar</b><span>Darkhan Juzz</span></li></ol></article>
         </div>
       </section>
 
@@ -89,6 +94,7 @@
     <dialog class="gallery-modal">
       <button class="close" aria-label="Жабу">×</button>
       <p class="modal-label"></p>
+      <div class="case-study-content"></div>
       <div class="gallery-content"></div>
     </dialog>
     <script src="script.js"></script>
