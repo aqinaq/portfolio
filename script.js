@@ -98,7 +98,7 @@ const projects = [
   {title:'Idea', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['idea.png'], className:'single'}
 ];
 
-const src = file => `public/assets/${file.split('/').map(encodeURIComponent).join('/')}`;
+const src = file => `public/assets/${file.replace(/\.png$/i, '.webp').split('/').map(encodeURIComponent).join('/')}`;
 const label = file => file.replace(/\.[^.]+$/,'').replace(/\d+/g,'').replace(/[-_]/g,' ').trim() || 'Untitled';
 let currentLanguage = localStorage.getItem('portfolio-language') || 'en';
 let currentFilter = 'all';
