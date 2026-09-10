@@ -1,287 +1,89 @@
-const modal = document.querySelector('.gallery-modal');
-const content = document.querySelector('.gallery-content');
-const caseContent = document.querySelector('.case-study-content');
-const modalLabel = document.querySelector('.modal-label');
 const grid = document.querySelector('.project-grid');
-const cursor = document.querySelector('.cursor-dot');
-const languageToggle = document.querySelector('.language-toggle');
-
-function moveCursorTo(layer) {
-  if (cursor.parentElement !== layer) layer.appendChild(cursor);
-}
-
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const galleries = {
-  sushi: ['sushi 1.png','sushi 2.png','sushi 3.png','sushi 4.png','sushi 5.png','sushi 6.png','sushi 7.png','sushi 8.png','sushi 9.png'],
-  desserts: ['desserts.png','dessert2.png','dessert3.png','dessert4.png','dessert5.png','dessert6.png','desserts7.png','dessert8.png','dessert9.png'],
-  claude: ['claude 1.png','claude2.png','claude3.png','claude4.png','claude5.png','claude6.png','claude7.png','claude8.png']
-};
-
-const caseStudies = {
-  sushi: {
-    en: {
-      kicker: 'Concept case study / Social media',
-      brief: 'Build a nine-post visual world for an imaginary sushi club that feels more like an underground fashion editorial than a restaurant menu.',
-      idea: 'Appetite meets attitude: deep reds, close food crops, dark surfaces and condensed type make every post feel tactile and immediate.',
-      process: ['Lock the red, cream and black palette.', 'Alternate product close-ups with type-led posts.', 'Repeat shapes and spacing so nine posts read as one system.'],
-      outcome: 'A connected social series with enough rhythm to feel consistent and enough variation to keep the feed alive.'
-    },
-    kk: {
-      kicker: 'Концепт кейс / Әлеуметтік желі',
-      brief: 'Ойдан шығарылған sushi club үшін мейрамхана мәзірінен гөрі underground fashion editorial сезімін беретін тоғыз посттық визуал әлем құру.',
-      idea: 'Тәбет пен мінездің қоспасы: қою қызыл түс, жақын кадрлар, қара фон және жинақы қаріп әр постты сезілетіндей етеді.',
-      process: ['Қызыл, крем және қара палитраны бекіту.', 'Өнім кадрларын типографикалық посттармен алмастыру.', 'Тоғыз пост бір жүйе болып оқылуы үшін пішін мен аралықты қайталау.'],
-      outcome: 'Біртұтас көрінетін, бірақ әр посты жеке мінезге ие әлеуметтік желі сериясы.'
-    }
-  },
-  desserts: {
-    en: {
-      kicker: 'Concept case study / Campaign',
-      brief: 'Turn macarons into the heroes of a nostalgic campaign without losing the playful energy of a modern social feed.',
-      idea: 'Pistachio green, cherry red and warm paper texture create a sweet retro mood; oversized serif type adds drama.',
-      process: ['Choose one flavour-led colour story.', 'Treat every dessert like a magazine cover star.', 'Use scale changes to move between quiet and loud posts.'],
-      outcome: 'A nine-piece campaign that can move from feed posts to menus, packaging or printed promotional cards.'
-    },
-    kk: {
-      kicker: 'Концепт кейс / Кампания',
-      brief: 'Macaron-дарды заманауи social feed энергиясын жоғалтпай, ностальгиялық кампанияның басты кейіпкеріне айналдыру.',
-      idea: 'Pistachio жасылы, cherry қызылы және жылы қағаз texture-ы тәтті retro көңіл-күй береді; үлкен serif қаріп драма қосады.',
-      process: ['Бір дәмге негізделген түс тарихын таңдау.', 'Әр десертті журнал мұқабасының жұлдызы сияқты көрсету.', 'Тыныш және батыл посттар арасында масштабты өзгерту.'],
-      outcome: 'Feed, мәзір, қаптама немесе баспа карточкаларына бейімделетін тоғыз жұмыстық кампания.'
-    }
-  },
-  claude: {
-    en: {
-      kicker: 'Concept case study / Editorial',
-      brief: 'Explore how an AI topic can feel human, curious and editorial instead of looking like conventional technology advertising.',
-      idea: 'Soft cream, coral and blue meet imperfect texture, conversational questions and playful modular frames.',
-      process: ['Start with questions instead of product claims.', 'Build a flexible frame system around the copy.', 'Use texture to remove the cold digital feeling.'],
-      outcome: 'An eight-post editorial series that introduces a complex topic through approachable visual storytelling.'
-    },
-    kk: {
-      kicker: 'Концепт кейс / Editorial',
-      brief: 'AI тақырыбын кәдімгі технология жарнамасындай емес, адамға жақын, қызық және editorial түрде көрсету.',
-      idea: 'Жұмсақ крем, coral және көк түстер imperfect texture, сұрақтар және модульді рамкалармен бірігеді.',
-      process: ['Өнім уәдесінен емес, сұрақтан бастау.', 'Мәтін айналасына икемді frame жүйесін құру.', 'Салқын digital сезімді texture арқылы жұмсарту.'],
-      outcome: 'Күрделі тақырыпты түсінікті визуал storytelling арқылы таныстыратын сегіз посттық editorial серия.'
-    }
-  }
-};
-
-const projects = [
-  {key:'sushi', title:'Sushi Social Club', type:{en:'Social media series',kk:'Әлеуметтік желі сериясы'}, category:'series', files:galleries.sushi, className:'project-large'},
-  {key:'desserts', title:'Macaroon Club', type:{en:'Campaign series',kk:'Кампания сериясы'}, category:'series', files:galleries.desserts, className:'project-tall'},
-  {key:'claude', title:'Claude Magazine', type:{en:'Editorial series',kk:'Editorial серия'}, category:'series', files:galleries.claude, className:'project-wide'},
-  {title:'Weekend Blooms', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['weekendblooms flyer.png'], className:'single'},
-  {title:'Kök Coffee', type:{en:'Brand concept',kk:'Бренд концепті'}, category:'branding', files:['kok coffee.png'], className:'single'},
-  {title:'Small Things', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['smallthings.png'], className:'single'},
-  {title:'Lalagül', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['lalagul.png'], className:'single'},
-  {title:'Pizza', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['pizza.png'], className:'single'},
-  {title:'Light', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['light.png'], className:'single'},
-  {title:'Copying', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['copying.png'], className:'single'},
-  {title:'Are You Bored Yet?', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['are you bored yet.png'], className:'single'},
-  {title:'Idea', type:{en:'Poster',kk:'Постер'}, category:'poster', files:['idea.png'], className:'single'}
-];
-
-const src = file => `public/assets/${file.replace(/\.png$/i, '.webp').split('/').map(encodeURIComponent).join('/')}`;
-const label = file => file.replace(/\.[^.]+$/,'').replace(/\d+/g,'').replace(/[-_]/g,' ').trim() || 'Untitled';
 let currentLanguage = 'en';
 try { currentLanguage = localStorage.getItem('portfolio-language') === 'kk' ? 'kk' : 'en'; } catch {}
 let currentFilter = 'all';
-
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const copy = {
-  en: {
-    topNote:'graphic designer<br>based in Kazakhstan', contact:'let\'s talk <i>↗</i>', availability:'<i></i> available for freelance',
-    heroLabel:'Independent graphic designer / Portfolio 2026', heroTitle:'Made to<br>make you<br><em>look.</em><span class="hero-asterisk" aria-hidden="true">✳</span>', heroText:'Visual identities, posters and social campaigns with colour, character and a point of view.', scroll:'Explore my work <span>↘</span>',
-    aboutTag:'( a little bit about me )', aboutCopy:'I turn <span>“what if?”</span> into visuals that make you look twice.', aboutText:'I’m Akbope, a graphic designer and Astana IT University student based in Astana. I bring expressive typography, unexpected colour and a curious eye to identities, posters and social campaigns. I’m open to freelance projects and creative collaborations.',
-    work:'( selected work )', all:'all', series:'series', posters:'posters', branding:'branding', shuffle:'Surprise me ↻',
-    servicesTag:'( what i can make )', servicesNote:'always learning, always up for a new challenge', servicesTitle:'Pick a format.<br><em>Let\'s play.</em>',
-    services:['Event, movie &amp; awareness<br>campaign posters','Album covers &amp;<br>music artwork','Social media campaigns:<br>posts, stories &amp; ads','Packaging: labels,<br>boxes &amp; bags','Website &amp; landing<br>page design','Loyalty cards, infographics<br>&amp; typographic posters'],
-    moodTag:'( my design ingredients )', moodNote:'made for looking twice', moodTitle:'Colour, type<br>&amp; a little <em>chaos.</em>',
-    contactTag:'( have an idea? )', contactTitle:'Let\'s make<br>something <em>fun.</em>', brief:'or send a tiny brief ↓', send:'send brief to telegram ↗', placeholders:['what are we making?','mood / colour / reference','when do you need it?'],
-    made:'made with colour &amp; curiosity', back:'back to top ↑', view:'see all', shuffleFound:'Now looking at', caseLabels:['Brief','Visual idea','Design notes','Outcome'], gallery:'The complete series', concept:'Independent concept project. These design notes describe the visual approach; they are not client documentation or measured business results.', compareTitle:'Colour changes<br>the feeling.', compareText:'Slide between a monochrome treatment and the finished artwork to explore how colour shapes the composition. Both views use the same final design.'
-  },
-  kk: {
-    topNote:'графикалық дизайнер<br>Қазақстан, Астана', contact:'байланысу <i>↗</i>', availability:'<i></i> фрилансқа ашықпын',
-    heroLabel:'Тәуелсіз графикалық дизайнер / Портфолио 2026', heroTitle:'Көз тоқтатар.<br><em>Ой салар.</em>', heroText:'Визуалды айдентика, постерлер және әлеуметтік желіге арналған дизайн жасаймын.', scroll:'жұмыстарды көру <span>↓</span>',
-    aboutTag:'( мен туралы қысқаша )', aboutCopy:'Мен <span>“ал егер?”</span> деген ойды көз тоқтататын визуалға айналдырамын.', aboutText:'Мен — Астанадағы Astana IT University студенті және freestyle графикалық дизайнермін. Қызық идея, жаңа формат не бейтаныс жанр болса — бірге зерттеп көруге дайынмын.',
-    work:'( таңдамалы жұмыстар )', all:'барлығы', series:'сериялар', posters:'постерлер', branding:'брендинг', shuffle:'кездейсоқ жұмыс ↻',
-    servicesTag:'( не жасай аламын )', servicesNote:'үнемі үйренемін, жаңа форматқа ашықпын', servicesTitle:'Форматты таңда.<br><em>Бірге ойнайық.</em>',
-    services:['Event, movie және awareness<br>кампания постерлері','Альбом мұқабасы және<br>music artwork','Әлеуметтік желі кампаниясы:<br>пост, stories және жарнама','Қаптама: label,<br>қорап және пакет','Вебсайт және landing<br>page дизайны','Loyalty card, инфографика<br>және типографикалық постер'],
-    moodTag:'( дизайн ингредиенттерім )', moodNote:'көзді қайта тоқтату үшін', moodTitle:'Түс, қаріп<br>және аздап <em>хаос.</em>',
-    contactTag:'( идеяң бар ма? )', contactTitle:'Бірге қызық<br>нәрсе <em>жасайық.</em>', brief:'немесе қысқа brief қалдыр ↓', send:'telegram-ға жіберу ↗', placeholders:['не жасаймыз?','көңіл-күй / түс / референс','қашан керек?'],
-    made:'түспен және қызығушылықпен жасалды', back:'жоғарыға ↑', view:'барлығын көру:', shuffleFound:'Қазір қарап тұрғаның:', caseLabels:['Міндет','Визуал идея','Дизайн шешімдері','Нәтиже'], gallery:'Толық серия', concept:'Тәуелсіз концепт жоба. Бұл жазбалар визуал тәсілді сипаттайды; клиент құжаты немесе өлшенген бизнес нәтижесі емес.', compareTitle:'Түс көңіл-күйді<br>өзгертеді.', compareText:'Түстің композицияға әсерін көру үшін жүгірткіні жылжытыңыз. Екі көріністе де бір дайын дизайн қолданылған: монохром өңдеу және түпнұсқа.'
-  }
+ en: {
+  heroLabel:'Graphic & digital designer / Portfolio 2026', heroTitle:'Visuals with<br><em>flavour</em><br>&amp; feeling.<span class="hero-asterisk" aria-hidden="true">✳</span>', heroText:'Graphic & digital designer creating bold identities, campaigns and digital experiences for brands with a point of view.',
+  available:'Available for freelance & part-time · Astana, Kazakhstan · Remote', topAvailable:'available for projects & opportunities', workCTA:'View my work <span>↓</span>', talk:'Let’s work together ↗',
+  workHeading:'Selected work,<br><em>full of character.</em>', workText:'Selected identities, campaigns and working digital products. Seven projects, different points of view.',
+  nav:['Work','About','Services'], filters:['all','brand','campaign','digital','experimental'], shuffle:'shuffle my work ↻', menu:'Menu', closeMenu:'Close',
+  aboutTag:'( a little bit about me )', aboutCopy:'I turn <span>“what if?”</span> into visuals that make you look twice.', aboutText:'I’m Ақбөпе, an Astana-based graphic & digital designer and Software Engineering student at Astana IT University. I work across visual identity, campaigns and digital experiences, combining a designer’s eye with an understanding of how digital products are built. I like expressive typography, unexpected colour and ideas that feel a little too bold at first.',
+  capabilities:['DESIGN','DIGITAL'], capabilityText:['Visual identity · Typography · Art direction','Web design · Responsive design · HTML/CSS · AI-assisted development'],
+  servicesTag:'( what i can do )', servicesNote:'From a visual direction to a working website', servicesTitle:'Good ideas.<br><em>Made real.</em>', serviceHeads:['Brand & identity','Campaign & content','Web & digital'], serviceText:['Visual identities · Logo systems · Typography & colour · Packaging','Campaign concepts · Posters · Social media · Digital ads','Web design · Landing pages · Portfolio websites · Design + build'], extra:'Something else in mind? Let’s talk ↗',
+  buildTitle:'Beyond the<br><em>Figma file.</em>', buildText:'I create the visual direction, design the digital experience and turn it into a responsive, working website — with AI-assisted development.',
+  moodTag:'( my design ingredients )', moodNote:'made for looking twice', moodTitle:'Colour, type<br>&amp; a little <em>chaos.</em>', moodLabels:['01 / colour energy','02 / type mood','03 / design soundtrack'],
+  contactTag:'( have a project? )', contactTitle:'Let’s make<br>something <em>fun.</em>', contactAvailable:'Available for freelance projects, part-time roles & creative collaborations.<br>Astana, Kazakhstan · Remote', brief:'Send a tiny brief ↓', send:'Open brief in Telegram ↗', fields:['what are we making?','mood / colour / references','when do you need it?'], cv:'Download CV ↓',
+  footer:'Designed & built by me — with colour & curiosity ✳', back:'back to top ↑', view:'View case study', live:'View live', skip:'Skip to selected work', shown:'Showing', found:'Now looking at', concept:'Concept project', self:'Self-initiated project',
+ },
+ kk: {
+  heroLabel:'Графикалық және цифрлық дизайнер / Портфолио 2026', heroTitle:'Дәмі бар.<br><em>Сезімі бар.</em><br>Дизайн.', heroText:'Брендтің мінезін ашатын батыл айдентика, кампаниялар және цифрлық тәжірибелер жасаймын.',
+  available:'Фриланс пен жартылай жұмысқа ашықпын · Астана, Қазақстан · Қашықтан', topAvailable:'жобалар мен ұсыныстарға ашықпын', workCTA:'Жұмыстарды көру <span>↓</span>', talk:'Бірге жұмыс істейік ↗',
+  workHeading:'Мінезі бар<br><em>жұмыстар.</em>', workText:'Таңдалған айдентика, кампаниялар және жұмыс істейтін цифрлық өнімдер. Жеті жоба, әртүрлі көзқарас.',
+  nav:['Жұмыстар','Мен туралы','Қызметтер'], filters:['барлығы','бренд','кампания','цифрлық','эксперимент'], shuffle:'кездейсоқ жұмыс ↻', menu:'Мәзір', closeMenu:'Жабу',
+  aboutTag:'( мен туралы қысқаша )', aboutCopy:'Мен <span>“ал егер?”</span> деген ойды көз тоқтататын визуалға айналдырамын.', aboutText:'Мен — Ақбөпе, Астанадағы графикалық және цифрлық дизайнер, Astana IT University университетінің Software Engineering студентімін. Визуал айдентика, кампаниялар және цифрлық тәжірибелермен жұмыс істеймін. Дизайнерлік көзқарасымды цифрлық өнімдердің қалай жасалатынын түсінумен біріктіремін. Мәнерлі қаріпті, күтпеген түстерді және алғашында тым батыл көрінетін идеяларды ұнатамын.',
+  capabilities:['ДИЗАЙН','ЦИФРЛЫҚ'], capabilityText:['Визуал айдентика · Типография · Арт-дирекшн','Вебдизайн · Бейімделетін дизайн · HTML/CSS · ЖИ көмегімен әзірлеу'],
+  servicesTag:'( не жасай аламын )', servicesNote:'Визуал бағыттан жұмыс істейтін сайтқа дейін', servicesTitle:'Жақсы идея.<br><em>Нақты нәтиже.</em>', serviceHeads:['Бренд және айдентика','Кампания және контент','Веб және цифрлық өнім'], serviceText:['Визуал айдентика · Логотип жүйелері · Қаріп пен түс · Қаптама','Кампания концепті · Постерлер · Әлеуметтік желі · Цифрлық жарнама','Вебдизайн · Лендингтер · Портфолио сайттары · Дизайн және әзірлеу'], extra:'Басқа идеяңыз бар ма? Сөйлесейік ↗',
+  buildTitle:'Figma-дан<br><em>әрі қарай.</em>', buildText:'Визуал бағытты анықтап, цифрлық тәжірибені жобалаймын және ЖИ көмегімен оны әр экранға бейімделетін, жұмыс істейтін сайтқа айналдырамын.',
+  moodTag:'( дизайн ингредиенттерім )', moodNote:'көзді қайта тоқтату үшін', moodTitle:'Түс, қаріп<br>және сәл <em>хаос.</em>', moodLabels:['01 / түс қуаты','02 / қаріп мінезі','03 / дизайн әуендері'],
+  contactTag:'( жобаңыз бар ма? )', contactTitle:'Бірге қызық<br>дүние <em>жасайық.</em>', contactAvailable:'Фриланс жобаларға, жартылай жұмысқа және шығармашылық серіктестікке ашықпын.<br>Астана, Қазақстан · Қашықтан', brief:'Қысқаша бриф жіберіңіз ↓', send:'Брифті Telegram-да ашу ↗', fields:['не жасаймыз?','көңіл-күй / түс / референстер','қашан дайын болуы керек?'], cv:'Түйіндемені жүктеу ↓',
+  footer:'Дизайнын да, сайтын да өзім жасадым — түс пен қызығушылықпен ✳', back:'жоғарыға ↑', view:'Кейсті көру', live:'Сайтты ашу', skip:'Жұмыстарға өту', shown:'Көрсетілді', found:'Таңдалған жұмыс', concept:'Концепт жоба', self:'Өз бастамаммен жасалған жоба',
+ }
 };
-
-const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting) {
-    entry.target.classList.add('is-visible');
-    revealObserver.unobserve(entry.target);
-  }
-}), {threshold:0.12});
-
-function observeReveals() {
-  const elements = document.querySelectorAll('.about > *:not(.flower), .work .section-head, .work-tools, .project, .services > :not(.services-grid), .services-grid > div, .moodboard > :not(.mood-grid), .mood-card, .contact > *, .brief-form');
-  elements.forEach((element, index) => {
-    if (!element.classList.contains('reveal')) element.classList.add('reveal');
-    element.style.setProperty('--delay', `${(index % 3) * 70}ms`);
-    revealObserver.observe(element);
-  });
-}
-
-function setupCursorCards() {
-  document.querySelectorAll('.project:not(.single) .project-image').forEach(card => {
-    card.addEventListener('pointerenter', () => cursor.classList.add('is-open'));
-    card.addEventListener('pointerleave', () => cursor.classList.remove('is-open'));
-  });
-}
-
+function put(selector, value, html=false) { const element=document.querySelector(selector); if(element) element[html?'innerHTML':'textContent']=value; }
 function renderProjects() {
-  const lang = currentLanguage;
-  grid.innerHTML = projects.map((project, index) => {
-    const isSeries = project.files.length > 1;
-    const images = isSeries ? [project.files[0], project.files[2], ...(index === 2 ? [project.files[5]] : [])] : project.files;
-    const artwork = images.map((file, imageIndex) => `<img loading="lazy" decoding="async" src="${src(file)}" alt="${project.title} — ${imageIndex + 1}">`).join('');
-    const action = isSeries ? `${lang === 'kk' ? 'Серияны көру' : 'View series'} · ${project.files.length}` : (lang === 'kk' ? 'Толық көру' : 'View poster');
-    const card = `${isSeries ? `<span class="project-stage">${artwork}</span>` : artwork}<span class="view">${action} <b aria-hidden="true">↗</b></span>`;
-    const aria = lang === 'kk' ? `${project.title} жобасын ашу` : `Open ${project.title}`;
-    return `<article class="project ${project.className}" data-project-index="${index}" data-category="${project.category}"><button type="button" class="project-image" aria-label="${aria}">${card}</button><div class="project-info"><span class="project-number">${String(index + 1).padStart(2, '0')}</span><h2>${project.title}</h2><p>${project.type[lang]}</p></div></article>`;
-  }).join('');
-  document.querySelectorAll('.project button').forEach(button => button.addEventListener('click', () => {
-    openCaseStudy(projects[Number(button.closest('.project').dataset.projectIndex)]);
-  }));
-  setupCursorCards();
-  applyFilter(currentFilter);
-  observeReveals();
+ const t=copy[currentLanguage];
+ grid.innerHTML=projects.map((p,index)=>{
+  const digital=p.category==='digital';
+  const files=digital?[p.files[0]]:p.files.slice(0,p.key==='claude'?3:2);
+  const art=files.map((file,i)=>`<img loading="lazy" decoding="async" src="${src(file)}" alt="${p.title} — ${digital ? (currentLanguage==='kk'?'сайт интерфейсі':'website interface') : i+1}" width="${digital?1440:1000}" height="${digital?1000:1333}">`).join('');
+  return `<article class="project ${digital?'project-digital':''} ${files.length===1&&!digital?'single':''}" data-key="${p.key}" data-category="${p.category}"><a class="project-image" href="${projectHref(p.key)}" aria-label="${p.title} — ${t.view}"><span class="project-stage">${art}</span><span class="view">${t.view} <b aria-hidden="true">↗</b></span></a><div class="project-info"><span class="project-number">${String(index+1).padStart(2,'0')}</span><h2><a href="${projectHref(p.key)}">${p.title}</a></h2><p>${p.role[currentLanguage]}${p.year?' · '+p.year:''}</p></div><p class="project-description">${p.summary[currentLanguage]}</p><div class="project-links"><span>${p.kind==='self'?t.self:t.concept}</span>${p.live?`<a href="${p.live}" target="_blank" rel="noopener">${t.live} ↗</a>`:''}</div></article>`;
+ }).join('');
+ applyFilter(currentFilter,false);
 }
-
-function openCaseStudy(project) {
-  const lang = currentLanguage;
-  const study = caseStudies[project.key]?.[lang];
-  if (!study) {
-    modal.classList.remove('has-study');
-    modalLabel.textContent = `${project.title} — ${project.type[lang]}`;
-    caseContent.innerHTML = '';
-    content.innerHTML = `<img src="${src(project.files[0])}" alt="${project.title} design">`;
-    modal.showModal();
-    modal.scrollTop = 0;
-    return;
-  }
-  const labels = copy[lang].caseLabels;
-  modal.classList.add('has-study');
-  modalLabel.textContent = `${project.title} — ${lang === 'kk' ? 'КОНЦЕПТ ЖОБА' : 'CONCEPT PROJECT'}`;
-  caseContent.innerHTML = `
-    <div class="case-intro"><div><span class="case-kicker">${study.kicker}</span><h2>${project.title}</h2><p class="case-summary">${study.brief}</p></div><div class="case-facts"><div><b>${labels[0]}</b><p>${study.brief}</p></div><div><b>${labels[1]}</b><p>${study.idea}</p></div></div></div>
-    <p class="process-title">${labels[2]}</p><div class="process-list">${study.process.map((step, index) => `<div><b>0${index + 1}</b><p>${step}</p></div>`).join('')}</div>
-    <div class="comparison-wrap"><div class="comparison" data-label="${lang === 'kk' ? 'МОНОХРОМ / ТҮС' : 'MONOCHROME / COLOUR'}" aria-label="${lang === 'kk' ? 'Түстерді салыстыру' : 'Colour comparison'}"><img src="${src(project.files[0])}" alt="Monochrome treatment of the finished artwork"><div class="compare-final"><img src="${src(project.files[0])}" alt="Final poster"></div><div class="compare-handle"></div><input type="range" min="0" max="100" value="52" aria-label="${lang === 'kk' ? 'Түсті көріністің үлесі' : 'Reveal colour artwork'}"></div><div class="comparison-copy"><span class="case-kicker">${lang === 'kk' ? 'ТҮС ӘСЕРІ' : 'COLOUR STUDY'}</span><h3>${copy[lang].compareTitle}</h3><p>${copy[lang].compareText}</p></div></div>
-    <p class="outcome-title">${labels[3]}</p><p class="outcome">${study.outcome}</p><p class="concept-note">${copy[lang].concept}</p><p class="gallery-heading">${copy[lang].gallery} — ${project.files.length} ${lang === 'kk' ? 'ЖҰМЫС' : 'DESIGNS'}</p>`;
-  content.innerHTML = project.files.map(file => `<img loading="lazy" src="${src(file)}" alt="${label(file)} design">`).join('');
-  const comparison = caseContent.querySelector('.comparison');
-  comparison.querySelector('input').addEventListener('input', event => comparison.style.setProperty('--position', `${event.target.value}%`));
-  if (!modal.open) modal.showModal();
-  // A native <dialog> lives in the browser's top layer. Keep the custom
-  // cursor inside that layer while the case study is open so it stays visible.
-  moveCursorTo(modal);
-  modal.scrollTop = 0;
+function applyFilter(filter,announce=true){
+ currentFilter=filter;
+ document.querySelectorAll('[data-filter]').forEach(b=>{const active=b.dataset.filter===filter;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+ document.querySelectorAll('.project').forEach(p=>p.hidden=filter!=='all'&&p.dataset.category!==filter);
+ grid.classList.toggle('is-filtered',filter!=='all');
+ put('.shuffle-status',announce?`${copy[currentLanguage].shown}: ${document.querySelectorAll('.project:not([hidden])').length} / ${projects.length}`:'');
 }
-
-function applyFilter(filter) {
-  currentFilter = filter;
-  document.querySelectorAll('.filters button').forEach(button => {
-    const active = button.dataset.filter === filter;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-pressed', String(active));
-  });
-  document.querySelectorAll('.project').forEach(card => { card.hidden = filter !== 'all' && card.dataset.category !== filter; });
-  document.querySelector('.shuffle-status').textContent = '';
+function applyLanguage(){
+ const t=copy[currentLanguage];document.documentElement.lang=currentLanguage;
+ put('.hero-label',t.heroLabel);put('.hero h1',t.heroTitle,true);put('.hero-bottom>p',t.heroText);put('.hero-availability','<i></i>'+t.available,true);put('.availability','<i></i>'+t.topAvailable,true);put('.scroll-hint',t.workCTA,true);put('.hero-contact',t.talk);put('.contact-link',currentLanguage==='kk'?'байланысу ↗':'let’s talk ↗');
+ put('.work-heading h2',t.workHeading,true);put('.work-heading>p',t.workText);put('.section-head p:first-child',currentLanguage==='kk'?'( таңдамалы жұмыстар )':'( selected work )');
+ document.querySelectorAll('[data-nav]').forEach((a,i)=>a.innerHTML=t.nav[i]+(i===0?` <span>${projects.length}</span>`:''));
+ document.querySelectorAll('[data-filter]').forEach((b,i)=>b.textContent=t.filters[i]);put('.shuffle-button',t.shuffle);
+ put('.about-tag',t.aboutTag);put('.about-copy',t.aboutCopy,true);put('.about-details>p',t.aboutText);
+ document.querySelectorAll('.capabilities h3').forEach((e,i)=>e.textContent=t.capabilities[i]);document.querySelectorAll('.capabilities p').forEach((e,i)=>e.textContent=t.capabilityText[i]);
+ put('.services-head p:first-child',t.servicesTag);put('.services-head p:last-child',t.servicesNote);put('.services h2',t.servicesTitle,true);
+ document.querySelectorAll('.services-grid h3').forEach((e,i)=>e.textContent=t.serviceHeads[i]);document.querySelectorAll('.services-grid p').forEach((e,i)=>e.textContent=t.serviceText[i]);put('.services-extra',t.extra);
+ put('.design-build h2',t.buildTitle,true);put('.design-build>div>p',t.buildText);put('.design-build>.eyebrow',currentLanguage==='kk'?'ДИЗАЙН + ӘЗІРЛЕУ':'DESIGN + BUILD');
+ put('.mood-head p:first-child',t.moodTag);put('.mood-head p:last-child',t.moodNote);put('.moodboard h2',t.moodTitle,true);document.querySelectorAll('.mood-card>p').forEach((e,i)=>e.textContent=t.moodLabels[i]);
+ put('.contact>p:first-child',t.contactTag);put('.contact h2',t.contactTitle,true);put('.contact-availability',t.contactAvailable,true);put('.brief-form>p',t.brief);put('.brief-form button',t.send);put('.contact-cv',t.cv);
+ document.querySelectorAll('.brief-form input').forEach((e,i)=>{e.placeholder=t.fields[i];e.setAttribute('aria-label',t.fields[i]);});
+ put('footer p:nth-child(2)',t.footer);put('footer a',t.back);put('.skip-link',t.skip);document.querySelector('.main-nav').setAttribute('aria-label',currentLanguage==='kk'?'Негізгі навигация':'Main navigation');document.querySelector('.filters').setAttribute('aria-label',currentLanguage==='kk'?'Жоба сүзгілері':'Project filters');grid.setAttribute('aria-label',currentLanguage==='kk'?'Портфолио жобалары':'Portfolio projects');
+ const toggle=document.querySelector('.language-toggle');toggle.textContent=currentLanguage==='en'?'EN / ҚАЗ':'ҚАЗ / EN';toggle.setAttribute('aria-label',currentLanguage==='en'?'Қазақ тіліне ауысу':'Switch to English');
+ put('.menu-toggle',document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='true'?t.closeMenu+' −':t.menu+' +');
+ put('.art-stamp',currentLanguage==='kk'?'батыл идея.<br>ерекше сезім.<span>☺</span>':'a little bold.<br>a lot of feeling.<span>☺</span>',true);put('.art-caption',currentLanguage==='kk'?'Менің әлемімнен бір үзік ↗':'A few things from my world ↗');
+ put('.portrait figcaption',currentLanguage==='kk'?'Ақбөпе, экраннан тыс ✳':'akböpe, outside the screen ✳');
+ put('.hero-footer',currentLanguage==='kk'?'<span>АҚБӨПЕ БАҚЫТКЕЛДІ</span><span>ҚАЗАҚСТАН, АСТАНА ↗</span><span>ТӨМЕНДЕ — ЖҰМЫСТАР ↓</span>':'<span>AKBOPE BAKYTKELDY</span><span>ASTANA, KAZAKHSTAN ↗</span><span>SCROLL FOR THE GOOD STUFF ↓</span>',true);
+ document.querySelectorAll('.marquee span').forEach((e,i)=>e.textContent=(currentLanguage==='kk'?['БРЕНДИНГ','КАМПАНИЯЛАР','ЦИФРЛЫҚ','ВЕБ']:['BRANDING','CAMPAIGNS','DIGITAL','WEB'])[i%4]);
+ document.title=currentLanguage==='kk'?'Ақбөпе Бақыткелді — графикалық және цифрлық дизайнер':'Akbope Bakytkeldy — Graphic & Digital Designer';renderProjects();
 }
-
-function applyLanguage() {
-  const lang = currentLanguage;
-  const t = copy[lang];
-  document.documentElement.lang = lang;
-  document.querySelector('.topbar-note').innerHTML = t.topNote;
-  document.querySelector('.contact-link').innerHTML = t.contact;
-  document.querySelector('.availability').innerHTML = t.availability;
-  document.querySelector('.hero-label').textContent = t.heroLabel;
-  document.querySelector('.hero h1').innerHTML = t.heroTitle;
-  document.querySelector('.hero-bottom p').textContent = t.heroText;
-  document.querySelector('.scroll-hint').innerHTML = t.scroll;
-  document.querySelector('.about-tag').textContent = t.aboutTag;
-  document.querySelector('.about-copy').innerHTML = t.aboutCopy;
-  document.querySelector('.about-details > p').textContent = t.aboutText;
-  document.querySelector('.section-head p:first-child').textContent = t.work;
-  document.querySelector('[data-filter="all"]').textContent = t.all;
-  document.querySelector('[data-filter="series"]').textContent = t.series;
-  document.querySelector('[data-filter="poster"]').textContent = t.posters;
-  document.querySelector('[data-filter="branding"]').textContent = t.branding;
-  document.querySelector('.shuffle-button').textContent = t.shuffle;
-  document.querySelector('.services-head p:first-child').textContent = t.servicesTag;
-  document.querySelector('.services-head p:last-child').textContent = t.servicesNote;
-  document.querySelector('.services h2').innerHTML = t.servicesTitle;
-  document.querySelectorAll('.services-grid p').forEach((item, index) => item.innerHTML = t.services[index]);
-  document.querySelector('.mood-head p:first-child').textContent = t.moodTag;
-  document.querySelector('.mood-head p:last-child').textContent = t.moodNote;
-  document.querySelector('.moodboard h2').innerHTML = t.moodTitle;
-  document.querySelector('.contact > p').textContent = t.contactTag;
-  document.querySelector('.contact h2').innerHTML = t.contactTitle;
-  document.querySelector('.brief-form > p').textContent = t.brief;
-  document.querySelector('.brief-form button').textContent = t.send;
-  document.querySelectorAll('.brief-form input').forEach((input, index) => input.placeholder = t.placeholders[index]);
-  document.querySelector('footer p:nth-child(2)').textContent = t.made;
-  document.querySelector('footer a').textContent = t.back;
-  languageToggle.textContent = lang === 'en' ? 'ҚАЗ' : 'EN';
-  languageToggle.setAttribute('aria-label', lang === 'en' ? 'Қазақ тіліне ауысу' : 'Switch to English');
-  document.querySelector('.work-heading h2').innerHTML = lang === 'kk' ? 'Мінезі бар<br><em>жұмыстар.</em>' : 'Selected work,<br><em>full of character.</em>';
-  document.querySelector('.work-heading > p').textContent = lang === 'kk' ? 'Кампаниялар, постерлер және визуал эксперименттер.' : 'A collection of campaigns, posters and visual experiments.';
-  document.querySelector('[data-nav="work"]').innerHTML = `${lang === 'kk' ? 'Жұмыстар' : 'Work'} <span>12</span>`;
-  document.querySelector('[data-nav="about"]').textContent = lang === 'kk' ? 'Мен туралы' : 'About';
-  document.querySelector('.art-stamp').innerHTML = lang === 'kk' ? 'батыл идея.<br>ерекше сезім.<span>☺</span>' : 'a little bold.<br>a lot of feeling.<span>☺</span>';
-  document.querySelector('.art-caption').textContent = lang === 'kk' ? 'Менің әлемімнен бір үзік ↗' : 'A few things from my world ↗';
-  document.querySelector('.hero-footer').innerHTML = lang === 'kk' ? '<span>АҚБӨПЕ БАҚЫТКЕЛДІ</span><span>ҚАЗАҚСТАН, АСТАНА ↗</span><span>ТӨМЕНДЕ — ЖҰМЫСТАР ↓</span>' : '<span>AKBOPE BAKYTKELDY</span><span>ASTANA, KAZAKHSTAN ↗</span><span>SCROLL FOR THE GOOD STUFF ↓</span>';
-  document.querySelector('.close').setAttribute('aria-label', lang === 'kk' ? 'Жобаны жабу' : 'Close project');
-  document.querySelector('.skip-link').textContent = lang === 'kk' ? 'Жұмыстарға өту' : 'Skip to selected work';
-  document.querySelectorAll('.brief-form input').forEach((input, index) => input.setAttribute('aria-label', t.placeholders[index]));
-  grid.setAttribute('aria-label', lang === 'kk' ? 'Портфолио жобалары' : 'Portfolio projects');
-  renderProjects();
-}
-
-document.querySelectorAll('.filters button').forEach(button => button.addEventListener('click', () => applyFilter(button.dataset.filter)));
-document.querySelector('.shuffle-button').addEventListener('click', () => {
-  const visible = [...document.querySelectorAll('.project:not([hidden])')];
-  if (!visible.length) return;
-  const chosen = visible[Math.floor(Math.random() * visible.length)];
-  document.querySelectorAll('.project').forEach(card => card.classList.remove('shuffle-hit'));
-  chosen.classList.add('shuffle-hit');
-  chosen.scrollIntoView({behavior:reduceMotion ? 'auto' : 'smooth', block:'center'});
-  const title = chosen.querySelector('h2').textContent;
-  document.querySelector('.shuffle-status').textContent = `${copy[currentLanguage].shuffleFound} ${title}`;
+document.querySelector('.language-toggle').addEventListener('click',()=>{currentLanguage=currentLanguage==='en'?'kk':'en';try{localStorage.setItem('portfolio-language',currentLanguage)}catch{}applyLanguage();});
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>applyFilter(b.dataset.filter)));
+document.querySelector('.shuffle-button').addEventListener('click',()=>{const visible=[...grid.querySelectorAll('.project:not([hidden])')];const chosen=visible[Math.floor(Math.random()*visible.length)];if(!chosen)return;grid.querySelectorAll('.project').forEach(p=>p.classList.remove('shuffle-hit'));chosen.classList.add('shuffle-hit');chosen.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'});put('.shuffle-status',`${copy[currentLanguage].found}: ${chosen.querySelector('h2').textContent}`);});
+const menu=document.querySelector('.menu-toggle');
+function closeMenu(restore=false){menu.setAttribute('aria-expanded','false');document.querySelector('.main-nav').classList.remove('is-open');menu.textContent=copy[currentLanguage].menu+' +';if(restore)menu.focus();}
+menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));document.querySelector('.main-nav').classList.toggle('is-open',open);menu.textContent=(open?copy[currentLanguage].closeMenu:copy[currentLanguage].menu)+(open?' −':' +');});
+document.querySelectorAll('.main-nav a').forEach(a=>a.addEventListener('click',()=>closeMenu()));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.getAttribute('aria-expanded')==='true')closeMenu(true)});
+document.querySelector('.brief-form').addEventListener('submit',event=>{
+ event.preventDefault();const data=new FormData(event.currentTarget);const project=String(data.get('project')||'').trim();if(!project){event.currentTarget.elements.project.focus();return;}
+ const message=currentLanguage==='kk'?`Сәлем, Ақбөпе! Дизайн жобам бар.\n\nЖоба: ${project}\nКөңіл-күй / референс: ${data.get('mood')||'—'}\nМерзім: ${data.get('deadline')||'—'}`:`Hi Akbope! I have a design brief.\n\nProject: ${project}\nMood / reference: ${data.get('mood')||'—'}\nDeadline: ${data.get('deadline')||'—'}`;
+ window.open(`https://t.me/meuseuk?text=${encodeURIComponent(message)}`,'_blank','noopener');
 });
-
-languageToggle.addEventListener('click', () => {
-  currentLanguage = currentLanguage === 'en' ? 'kk' : 'en';
-  try { localStorage.setItem('portfolio-language', currentLanguage); } catch {}
-  applyLanguage();
-});
-
-document.querySelector('.close').addEventListener('click', () => modal.close());
-modal.addEventListener('click', event => { if (event.target === modal) modal.close(); });
-modal.addEventListener('close', () => {
-  moveCursorTo(document.body);
-  modal.classList.remove('has-study');
-  caseContent.innerHTML = '';
-  content.innerHTML = '';
-  cursor.classList.remove('is-open');
-});
-window.addEventListener('pointermove', event => { cursor.style.left = `${event.clientX}px`; cursor.style.top = `${event.clientY}px`; });
-
-document.querySelector('.brief-form').addEventListener('submit', event => {
-  event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const message = encodeURIComponent(currentLanguage === 'kk' ? `Сәлем, Ақбөпе! Дизайнға тапсырыс бергім келеді.\n\nЖоба: ${data.get('project')}\nКөңіл-күй / референс: ${data.get('mood') || '—'}\nМерзім: ${data.get('deadline') || '—'}` : `Hi Akbope! I have a design brief.\n\nProject: ${data.get('project')}\nMood / reference: ${data.get('mood') || '—'}\nDeadline: ${data.get('deadline') || '—'}`);
-  window.open(`https://t.me/meuseuk?text=${message}`, '_blank', 'noopener');
-});
-
+// Music stays opt-in: links open a track search and never autoplay.
+document.querySelectorAll('.playlist li').forEach(li=>{const title=li.querySelector('b').textContent;const artist=li.querySelector('span').textContent;const a=document.createElement('a');a.href=`https://www.youtube.com/results?search_query=${encodeURIComponent(title+' '+artist)}`;a.target='_blank';a.rel='noopener';a.innerHTML=li.innerHTML+'<span aria-hidden="true">↗</span>';li.replaceChildren(a);});
 applyLanguage();
