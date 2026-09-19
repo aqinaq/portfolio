@@ -459,6 +459,7 @@ const allProjects = [
     "kind": "concept"
   }
 ];
-const projects = allProjects.filter(project => !['mountain', 'agylshyn', 'lngshot-poster'].includes(project.key));
+const selectedOrder = ['poster-studies', 'sushi', 'claude', 'desserts', 'kok-coffee'];
+const projects = selectedOrder.map(key => allProjects.find(project => project.key === key));
 const src = file => `public/assets/${file.replace(/\.png$/i, ".webp").split("/").map(encodeURIComponent).join("/")}`;
 const projectHref = key => `projects/${key}/`;

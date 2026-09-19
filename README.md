@@ -20,7 +20,7 @@ Hosting uses the existing project in `.openai/hosting.json`. The same `dist/` ou
 
 ## Current selection
 
-Sushi Social Club · Claude Magazine · Macaroon Club · Kök Coffee · Type & Feeling.
+Type & Feeling · Sushi Social Club · Claude Magazine · Macaroon Club · Kök Coffee.
 
 Kök Coffee remains an early brand exploration. Type & Feeling collects three independent posters, including the LNGSHOT music artwork. Future full branding projects can replace these without a layout redesign. No future project is presented as completed work.
 

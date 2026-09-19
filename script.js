@@ -36,7 +36,8 @@ function renderProjects() {
  const t=copy[currentLanguage];
  grid.innerHTML=projects.map((p,index)=>{
   const digital=p.category==='digital';
-  const files=digital?[p.files[0]]:p.files.slice(0,p.key==='claude'?3:2);
+  const previewCounts={"poster-studies":3,sushi:3,claude:3,desserts:2,"kok-coffee":1};
+  const files=digital?[p.files[0]]:p.files.slice(0,previewCounts[p.key]||2);
   const art=files.map((file,i)=>`<img loading="lazy" decoding="async" src="${src(file)}" alt="${p.title} — ${digital ? (currentLanguage==='kk'?'сайт интерфейсі':'website interface') : i+1}" width="${digital?1440:1000}" height="${digital?1000:1333}">`).join('');
   return `<article class="project ${digital?'project-digital':''} ${files.length===1&&!digital?'single':''}" data-key="${p.key}" data-category="${p.category}"><a class="project-image" href="${projectHref(p.key)}" aria-label="${p.title} — ${t.view}"><span class="project-stage">${art}</span><span class="view">${t.view} <b aria-hidden="true">↗</b></span></a><div class="project-info"><span class="project-number">${String(index+1).padStart(2,'0')}</span><h2><a href="${projectHref(p.key)}">${p.title}</a></h2><p>${p.role[currentLanguage]}${p.year?' · '+p.year:''}</p></div><p class="project-description">${p.summary[currentLanguage]}</p><div class="project-links"><span>${p.kind==='self'?t.self:t.concept}</span>${p.live?`<a href="${p.live}" target="_blank" rel="noopener">${t.live} ↗</a>`:''}</div></article>`;
  }).join('');
