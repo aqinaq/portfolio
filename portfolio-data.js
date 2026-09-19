@@ -1,5 +1,5 @@
 /* Edit this catalogue to replace or reorder selected work. Keep both languages complete. */
-const projects = [
+const allProjects = [
   {
     "key": "sushi",
     "title": "Sushi Social Club",
@@ -417,11 +417,12 @@ const projects = [
     "category": "experimental",
     "files": [
       "weekendblooms flyer.png",
-      "lalagul.png"
+      "lalagul.png",
+      "music concert.png"
     ],
     "summary": {
-      "en": "Two poster studies in expressive type, rhythm and composition.",
-      "kk": "Мәнерлі қаріп, ырғақ және композицияға арналған екі постер зерттеуі."
+      "en": "Three poster studies in expressive type, rhythm and composition.",
+      "kk": "Мәнерлі қаріп, ырғақ және композицияға арналған үш постер зерттеуі."
     },
     "role": {
       "en": "Typography · Poster design",
@@ -432,8 +433,8 @@ const projects = [
       "kk": "Көрермен әр сөзді оқымай тұрып, қаріп пен композиция постердің көңіл-күйін қалай жеткізетінін зерттеу."
     },
     "idea": {
-      "en": "Let each poster keep its own character. Weekend Blooms and Lalagül are separate visual studies, collected here as a compact selection.",
-      "kk": "Әр постер өз мінезін сақтайды. Weekend Blooms пен Lalagül — осы шағын топтамаға біріктірілген жеке визуал зерттеулер."
+      "en": "Let each poster keep its own character. Weekend Blooms, Lalagül and the LNGSHOT music poster are separate visual studies collected in one compact selection.",
+      "kk": "Әр постер өз мінезін сақтайды. Weekend Blooms, Lalagül және LNGSHOT музыкалық постері — бір шағын топтамаға біріктірілген жеке визуал зерттеулер."
     },
     "system": {
       "en": "Expressive typography, shifts in scale and deliberate contrast. Each composition is an independent experiment.",
@@ -452,11 +453,12 @@ const projects = [
       ]
     },
     "result": {
-      "en": "Two independent finished posters, selected for their different moods.",
-      "kk": "Әртүрлі көңіл-күйі үшін таңдалған екі жеке дайын постер."
+      "en": "Three independent finished posters, selected for their different moods and typographic voices.",
+      "kk": "Көңіл-күйі мен типографиялық мінезі әртүрлі үш жеке дайын постер."
     },
     "kind": "concept"
   }
 ];
+const projects = allProjects.filter(project => !['mountain', 'agylshyn', 'lngshot-poster'].includes(project.key));
 const src = file => `public/assets/${file.replace(/\.png$/i, ".webp").split("/").map(encodeURIComponent).join("/")}`;
 const projectHref = key => `projects/${key}/`;

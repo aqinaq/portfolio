@@ -8,7 +8,7 @@ for(const file of files.filter(f=>f.endsWith('.js')))new vm.Script(readFileSync(
 const context=vm.createContext({});
 vm.runInContext(readFileSync(resolve(root,'portfolio-data.js'),'utf8')+'\n'+readFileSync(resolve(root,'case-render.js'),'utf8')+'\nglobalThis.catalog={projects,src,projectHref,renderCase,caseCopy,escapeHTML};',context);
 const {projects,src,renderCase,caseCopy,escapeHTML:e}=context.catalog;
-if(projects.length>8)throw new Error('Keep the homepage selection to eight projects or fewer.');
+if(projects.length>6)throw new Error('Keep the graphic-design selection to six projects or fewer.');
 if(new Set(projects.map(p=>p.key)).size!==projects.length)throw new Error('Project keys must be unique.');
 for(const p of projects){
  if(!/^[a-z0-9-]+$/.test(p.key))throw new Error('Invalid project key');
