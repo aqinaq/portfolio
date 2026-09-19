@@ -359,6 +359,59 @@ const projects = [
     "kind": "concept"
   },
   {
+    "key": "lngshot-poster",
+    "title": "LNGSHOT — Upcoming Album",
+    "category": "campaign",
+    "files": [
+      "music concert.png"
+    ],
+    "summary": {
+      "en": "A high-energy music poster built from bold type, electric colour and cut-out portraiture.",
+      "kk": "Батыл қаріп, ашық түс және қиылған портреттерге негізделген музыкалық постер."
+    },
+    "role": {
+      "en": "Poster design · Art direction",
+      "kk": "Постер дизайны · Арт-дирекшн"
+    },
+    "challenge": {
+      "en": "Turn a dense set of album details into one immediate composition while keeping the artists, title and release date easy to find.",
+      "kk": "Альбом туралы көп ақпаратты бірден оқылатын композицияға біріктіріп, әртістерді, атауды және шығу күнін айқын көрсету."
+    },
+    "idea": {
+      "en": "Treat the poster like a collectible music insert: loud, layered and deliberately nostalgic, with the group framed as the central visual event.",
+      "kk": "Постерді коллекциялық музыкалық қосымша секілді құру: жарқын, қабатты және әдейі ностальгиялық, ал топ — негізгі визуал орталық."
+    },
+    "system": {
+      "en": "Acid yellow, sky blue and signal red; outlined display type; an oval portrait frame; and compact track-list details inspired by printed album graphics.",
+      "kk": "Қышқыл сары, аспан көк және ашық қызыл; контурлы акцидент қаріп; сопақ портрет жақтауы және баспа альбом графикасын еске түсіретін ықшам трек тізімі."
+    },
+    "steps": {
+      "en": [
+        "Establish a loud three-colour palette",
+        "Build hierarchy around title and portrait",
+        "Layer release and track details",
+        "Finish with print-inspired texture"
+      ],
+      "kk": [
+        "Жарқын үш түсті палитра құру",
+        "Атау мен портретке негізделген иерархия жасау",
+        "Шығу күні мен трек ақпаратын қабаттау",
+        "Баспа әсерін беретін фактурамен аяқтау"
+      ]
+    },
+    "result": {
+      "en": "One finished promotional poster with a playful Y2K-inspired music aesthetic. An independent concept; not commissioned by or affiliated with LNGSHOT or Jay Park.",
+      "kk": "Y2K музыка эстетикасынан шабыт алған бір дайын промо-постер. Тәуелсіз концепт; LNGSHOT немесе Jay Park тапсырысы емес және олармен байланысы жоқ."
+    },
+    "palette": [
+      "#eff514",
+      "#a8c7e7",
+      "#ed2729"
+    ],
+    "kind": "concept",
+    "year": "2026"
+  },
+  {
     "key": "poster-studies",
     "title": "Type & Feeling",
     "category": "experimental",

@@ -11,7 +11,7 @@ Hosting uses the existing project in `.openai/hosting.json`. The same `dist/` ou
 ## Replace a project later
 
 1. Add optimised artwork to `public/assets/`.
-2. Edit one entry in `portfolio-data.js`. Its position in the array controls homepage order; keep six or seven entries.
+2. Edit one entry in `portfolio-data.js`. Its position in the array controls homepage order; keep eight entries or fewer.
 3. Give it a stable, unique `key`, accurate project type and English (`en`) and Kazakh (`kk`) copy. `kind: 'concept'` identifies independent graphic studies; `kind: 'self'` identifies self-initiated products. Add only verified years, tools, deliverables and live links.
 4. Set its category to `brand`, `campaign`, `digital` or `experimental`.
 5. Run the build. Pages in `projects/` are generated from the catalogue and `case-render.js`; edit those source files rather than generated HTML. Old assets can remain archived locally.
@@ -20,7 +20,7 @@ Hosting uses the existing project in `.openai/hosting.json`. The same `dist/` ou
 
 ## Current selection
 
-Sushi Social Club · Mountain · Claude Magazine · Agylshyn · Macaroon Club · Kök Coffee · Type & Feeling.
+Sushi Social Club · Mountain · Claude Magazine · Agylshyn · Macaroon Club · Kök Coffee · LNGSHOT — Upcoming Album · Type & Feeling.
 
 Kök Coffee remains an early brand exploration. Type & Feeling collects two independent posters. Future full branding projects can replace these without a layout redesign. No future project is presented as completed work.
 

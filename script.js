@@ -7,7 +7,7 @@ const copy = {
  en: {
   heroLabel:'Graphic & digital designer / Portfolio 2026', heroTitle:'Visuals with<br><em>flavour</em><br>&amp; feeling.<span class="hero-asterisk" aria-hidden="true">✳</span>', heroText:'Graphic & digital designer creating bold identities, campaigns and digital experiences for brands with a point of view.',
   available:'Available for freelance & part-time · Astana, Kazakhstan · Remote', topAvailable:'available for projects & opportunities', workCTA:'View my work <span>↓</span>', talk:'Let’s work together ↗',
-  workHeading:'Selected work,<br><em>full of character.</em>', workText:'Selected identities, campaigns and working digital products. Seven projects, different points of view.',
+  workHeading:'Selected work,<br><em>full of character.</em>', workText:'Selected identities, campaigns and working digital products. Eight projects, different points of view.',
   nav:['Work','About','Services'], filters:['all','brand','campaign','digital','experimental'], shuffle:'shuffle my work ↻', menu:'Menu', closeMenu:'Close',
   aboutTag:'( a little bit about me )', aboutCopy:'I turn <span>“what if?”</span> into visuals that make you look twice.', aboutText:'I’m Ақбөпе, an Astana-based graphic & digital designer and Software Engineering student at Astana IT University. I work across visual identity, campaigns and digital experiences, combining a designer’s eye with an understanding of how digital products are built. I like expressive typography, unexpected colour and ideas that feel a little too bold at first.',
   capabilities:['DESIGN','DIGITAL'], capabilityText:['Visual identity · Typography · Art direction','Web design · Responsive design · HTML/CSS · AI-assisted development'],
@@ -20,7 +20,7 @@ const copy = {
  kk: {
   heroLabel:'Графикалық және цифрлық дизайнер / Портфолио 2026', heroTitle:'Дәмі бар.<br><em>Сезімі бар.</em><br>Дизайн.', heroText:'Брендтің мінезін ашатын батыл айдентика, кампаниялар және цифрлық тәжірибелер жасаймын.',
   available:'Фриланс пен жартылай жұмысқа ашықпын · Астана, Қазақстан · Қашықтан', topAvailable:'жобалар мен ұсыныстарға ашықпын', workCTA:'Жұмыстарды көру <span>↓</span>', talk:'Бірге жұмыс істейік ↗',
-  workHeading:'Мінезі бар<br><em>жұмыстар.</em>', workText:'Таңдалған айдентика, кампаниялар және жұмыс істейтін цифрлық өнімдер. Жеті жоба, әртүрлі көзқарас.',
+  workHeading:'Мінезі бар<br><em>жұмыстар.</em>', workText:'Таңдалған айдентика, кампаниялар және жұмыс істейтін цифрлық өнімдер. Сегіз жоба, әртүрлі көзқарас.',
   nav:['Жұмыстар','Мен туралы','Қызметтер'], filters:['барлығы','бренд','кампания','цифрлық','эксперимент'], shuffle:'кездейсоқ жұмыс ↻', menu:'Мәзір', closeMenu:'Жабу',
   aboutTag:'( мен туралы қысқаша )', aboutCopy:'Мен <span>“ал егер?”</span> деген ойды көз тоқтататын визуалға айналдырамын.', aboutText:'Мен — Ақбөпе, Астанадағы графикалық және цифрлық дизайнер, Astana IT University университетінің Software Engineering студентімін. Визуал айдентика, кампаниялар және цифрлық тәжірибелермен жұмыс істеймін. Дизайнерлік көзқарасымды цифрлық өнімдердің қалай жасалатынын түсінумен біріктіремін. Мәнерлі қаріпті, күтпеген түстерді және алғашында тым батыл көрінетін идеяларды ұнатамын.',
   capabilities:['ДИЗАЙН','ЦИФРЛЫҚ'], capabilityText:['Визуал айдентика · Типография · Арт-дирекшн','Вебдизайн · Бейімделетін дизайн · HTML/CSS · ЖИ көмегімен әзірлеу'],
@@ -82,7 +82,7 @@ document.querySelectorAll('.main-nav a').forEach(a=>a.addEventListener('click',(
 document.querySelector('.brief-form').addEventListener('submit',event=>{
  event.preventDefault();const data=new FormData(event.currentTarget);const project=String(data.get('project')||'').trim();if(!project){event.currentTarget.elements.project.focus();return;}
  const message=currentLanguage==='kk'?`Сәлем, Ақбөпе! Дизайн жобам бар.\n\nЖоба: ${project}\nКөңіл-күй / референс: ${data.get('mood')||'—'}\nМерзім: ${data.get('deadline')||'—'}`:`Hi Akbope! I have a design brief.\n\nProject: ${project}\nMood / reference: ${data.get('mood')||'—'}\nDeadline: ${data.get('deadline')||'—'}`;
- window.open(`https://t.me/meuseuk?text=${encodeURIComponent(message)}`,'_blank','noopener');
+ window.open(`https://t.me/akiboupie?text=${encodeURIComponent(message)}`,'_blank','noopener');
 });
 // Music stays opt-in: links open a track search and never autoplay.
 document.querySelectorAll('.playlist li').forEach(li=>{const title=li.querySelector('b').textContent;const artist=li.querySelector('span').textContent;const a=document.createElement('a');a.href=`https://www.youtube.com/results?search_query=${encodeURIComponent(title+' '+artist)}`;a.target='_blank';a.rel='noopener';a.innerHTML=li.innerHTML+'<span aria-hidden="true">↗</span>';li.replaceChildren(a);});
